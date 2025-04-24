@@ -61,8 +61,13 @@ public class ServerPortInfoApplicationContextInitializer implements
 
 	@Override
 	public void onApplicationEvent(WebServerInitializedEvent event) {
+		int port = event.getWebServer().getPort();
+		if (port <= 0 || port > 65535) {
+			// Handle invalid port number (you can log or set a default)
+			port = 8080;  // Default port
+		}
 		String propertyName = "local." + getName(event.getApplicationContext()) + ".port";
-		setPortProperty(event.getApplicationContext(), propertyName, event.getWebServer().getPort());
+		setPortProperty(event.getApplicationContext(), propertyName, port);
 	}
 
 	private String getName(WebServerApplicationContext context) {
