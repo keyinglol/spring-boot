@@ -33,4 +33,9 @@ class SampleSpringXmlApplicationTests {
 		assertThat(output).contains("Hello World");
 	}
 
+	@Test
+	void testCustomArgument(CapturedOutput output) {
+		SampleSpringXmlApplication.main(new String[] { "Spring" });
+		assertThat(output).contains("Hello Spring");
+	}
 }
