@@ -282,6 +282,25 @@ tasks.named("checkSpringConfigurationMetadata").configure {
 	]
 }
 
-test {
-	jvmArgs += "--add-opens=java.base/java.net=ALL-UNNAMED"
+test{
+	 useJUnitPlatform() 
+    // Add JVM arguments as needed
+    jvmArgs += "--add-opens=java.base/java.net=ALL-UNNAMED"
+
+    // Test logging configuration
+    testLogging {
+        events "passed", "skipped", "failed"  // Log passed, skipped, and failed tests
+        exceptionFormat "full"  // Show full exception stack trace for failed tests
+        showStandardStreams = true  // Show standard output (stdout) and error (stderr)
+    }
+
+    // Generate test reports
+	reports {
+		html {
+			destination = file("$buildDir/custom-reports/html")  // Custom HTML report location
+		}
+		junitXml {
+			destination = file("$buildDir/custom-reports/xml")  // Custom XML report location
+		}
+	}
 }
