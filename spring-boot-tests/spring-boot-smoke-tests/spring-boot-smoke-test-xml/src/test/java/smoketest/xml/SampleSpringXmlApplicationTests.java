@@ -30,7 +30,7 @@ class SampleSpringXmlApplicationTests {
 	@Test
 	void testDefaultSettings(CapturedOutput output) {
 		SampleSpringXmlApplication.main(new String[0]);
-		assertThat(output).contains("Hello World");
+		assertThat(output).contains("Helloo World");
 	}
 
 }
